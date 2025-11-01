@@ -24,9 +24,9 @@ $fs = 0.25; // .01
 
 /* [General Settings] */
 // number of bases along x-axis
-gridx = 2;
+gridx = 1;
 // number of bases along y-axis
-gridy = 2;
+gridy = 1;
 // bin height. See bin height information and "gridz_define" below.
 gridz = 3; //.1
 
@@ -86,6 +86,34 @@ printable_hole_top = true;
 enable_thumbscrew = false;
 
 hole_options = bundle_hole_options(refined_holes, magnet_holes, screw_holes, crush_ribs, chamfer_holes, printable_hole_top);
+
+// ===== MODULE FOR SIMPLE BIN CREATION ===== //
+
+// Create a simple bin with just 3 parameters
+// xGrids: number of bases along x-axis (must be >= 1)
+// yGrids: number of bases along y-axis (must be >= 1) 
+// height: height in millimeters above the bin feet
+module create_bin(xGrids, yGrids, height) {
+    // Validate parameters
+    assert(xGrids >= 1, "xGrids must be at least 1");
+    assert(yGrids >= 1, "yGrids must be at least 1");
+    assert(height > 0, "height must be greater than 0");
+    
+    // Create bin with simplified parameters
+    bin_simple = new_bin(
+        grid_size = [xGrids, yGrids],
+        height_mm = height,
+        fill_height = 0, // Use default
+        include_lip = false, // Default to no lip for simplicity
+        hole_options = bundle_hole_options(false, false, false, false, false, false), // No holes by default
+        only_corners = false,
+        thumbscrew = false,
+        grid_dimensions = GRID_DIMENSIONS_MM
+    );
+    
+    // Render the bin as a solid container (no compartments)
+    bin_render(bin_simple);
+}
 
 // ===== IMPLEMENTATION ===== //
 
