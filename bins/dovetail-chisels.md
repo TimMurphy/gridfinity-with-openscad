@@ -89,3 +89,13 @@ bins/
 - **Easy identification**: Clear size labeling prevents mix-ups
 - **Modular storage**: Integrates with standard Gridfinity grid system
 - **Workshop efficiency**: Quick visual inventory of available tools
+
+## OpenSCAD Usage Note
+
+When including the base bin module in your OpenSCAD file, use:
+
+```openscad
+include <src/solid-bin.scad>;
+```
+
+Do not use `include <../src/solid-bin.scad>`.
