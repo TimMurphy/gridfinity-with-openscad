@@ -42,46 +42,26 @@ bins/
 ### Design Features
 
 #### Blade Protection Recesses
-- **Location**: Front of bin (X=10mm from edge)
 - **Depth**: 5mm deep from top surface
-- **Dimensions per chisel**:
-  - 3mm chisel: 5mm wide × 62mm long recess
-  - 6mm chisel: 8mm wide × 62mm long recess  
-  - 12mm chisel: 14mm wide × 62mm long recess
 - **Purpose**: Protects cutting edges, prevents blade damage
 
 #### Handle Access Holes
-- **Location**: Back of bin (X=220mm from front edge)
 - **Type**: Cylindrical through-holes with finger reliefs
-- **Diameter**: 27mm (accommodates 25mm max handle width)
 - **Finger relief**: Oval cutout 35mm×20mm×8mm deep for grip
 - **Purpose**: Easy chisel insertion/removal
 
 #### Taper Channels
 - **Function**: Connects blade recesses to handle holes
-- **Profile**: Hull-generated smooth transition
-- **Start**: X=72mm (end of blade recess area)
-- **End**: X=150mm (beginning of handle area)
-- **Depth**: 10mm from top surface
-- **Cross-section**: Rectangular to circular transition
+- **Cross-section**: Circular
 
 #### Identification Labels
 - **Text**: "3mm", "6mm", "12mm" for each chisel slot
-- **Location**: X=100mm (center of bin), Y matches chisel positions
 - **Style**: Raised 2mm above bin floor
-- **Font**: Liberation Sans Bold, 4mm height
 - **Material**: Integrated into print (no separate labeling needed)
 
 ## Layout Configuration
 
 ## Technical Implementation
-
-### Key Parameters
-- **Chisel spacing**: 21mm center-to-center
-- **Blade recess depth**: 5mm from top surface
-- **Handle hole diameter**: 27mm through-hole
-- **Taper channel depth**: 10mm from top surface
-- **Text height**: 2mm raised above floor
 
 ### Implementation Details
 1. **Base bin creation**: Uses `create_bin()` from `solid-bin.scad`
@@ -100,23 +80,6 @@ bins/
 - **Print speed**: 50-60mm/s for good quality
 - **Nozzle temperature**: 210°C PLA / 240°C PETG
 - **Bed temperature**: 60°C PLA / 70°C PETG
-
-### Support Requirements
-- **Finger relief overhangs**: May need supports if >45° overhang
-- **Text labels**: Usually print well without supports (2mm height)
-- **Handle holes**: No supports needed (through-holes print cleanly)
-- **Taper channels**: No supports needed (gradual slope)
-
-### Print Orientation & Time
-- **Orientation**: Bin upright (standard Gridfinity position)
-- **Estimated time**: 4-6 hours @ 50mm/s depending on infill
-- **Filament usage**: ~150-200g depending on infill percentage
-
-### Post-Processing
-1. **Remove any support material** carefully from finger relief areas
-2. **Test fit chisels** before final use
-3. **Light sanding** of contact surfaces if chisels bind
-4. **Deburr** any sharp edges around cutouts
 
 ## Usage Instructions
 
