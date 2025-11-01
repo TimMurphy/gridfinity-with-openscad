@@ -6,15 +6,15 @@
     I edited this file to become the starting point of all of bins.
 */
 
-include <src/core/standard.scad>
-use <src/core/gridfinity-rebuilt-utility.scad>
-use <src/core/gridfinity-rebuilt-holes.scad>
-use <src/core/bin.scad>
-use <src/core/cutouts.scad>
-use <src/helpers/generic-helpers.scad>
-use <src/helpers/grid.scad>
-use <src/helpers/grid_element.scad>
-use <src/helpers/generic-helpers.scad>
+include <../../gridfinity-rebuilt-openscad/src/core/standard.scad>
+use <../../gridfinity-rebuilt-openscad/src/core/gridfinity-rebuilt-utility.scad>
+use <../../gridfinity-rebuilt-openscad/src/core/gridfinity-rebuilt-holes.scad>
+use <../../gridfinity-rebuilt-openscad/src/core/bin.scad>
+use <../../gridfinity-rebuilt-openscad/src/core/cutouts.scad>
+use <../../gridfinity-rebuilt-openscad/src/helpers/generic-helpers.scad>
+use <../../gridfinity-rebuilt-openscad/src/helpers/grid.scad>
+use <../../gridfinity-rebuilt-openscad/src/helpers/grid_element.scad>
+use <../../gridfinity-rebuilt-openscad/src/helpers/generic-helpers.scad>
 
 // ===== PARAMETERS ===== //
 
