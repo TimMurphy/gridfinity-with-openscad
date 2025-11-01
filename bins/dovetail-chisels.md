@@ -61,16 +61,6 @@ bins/
 
 ## Layout Configuration
 
-## Technical Implementation
-
-### Implementation Details
-1. **Base bin creation**: Uses `create_bin()` from `solid-bin.scad`
-2. **Cutout generation**: `difference()` operation removes material
-3. **Blade recesses**: Individual `cube()` cutouts per chisel size
-4. **Handle holes**: `cylinder()` cutouts with finger relief `scale()`
-5. **Taper channels**: `hull()` operation between rectangular and circular shapes
-6. **Text labels**: `linear_extrude()` with `text()` function
-
 ## 3D Printing Guide
 
 ### Recommended Print Settings
