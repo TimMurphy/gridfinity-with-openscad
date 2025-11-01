@@ -24,11 +24,11 @@ $fs = 0.25; // .01
 
 /* [General Settings] */
 // number of bases along x-axis
-gridx = 3;
+gridx = 2;
 // number of bases along y-axis
 gridy = 2;
 // bin height. See bin height information and "gridz_define" below.
-gridz = 6; //.1
+gridz = 3; //.1
 
 // Half grid sized bins.  Implies "only corners".
 half_grid = false;
@@ -41,13 +41,13 @@ height_internal = 0;
 // snap gridz height to nearest 7mm increment
 enable_zsnap = false;
 // If the top lip should exist.  Not included in height calculations.
-include_lip = true;
+include_lip = false;
 
 /* [Compartments] */
 // number of X Divisions (set to zero to have solid bin)
-divx = 1;
+divx = 0;
 // number of Y Divisions (set to zero to have solid bin)
-divy = 1;
+divy = 0;
 // Leave zero for default. Units: mm
 depth = 0;  //.1
 
@@ -61,17 +61,17 @@ c_chamfer = 0.5; // .1
 
 /* [Compartment Features] */
 // the type of tabs
-style_tab = 1; //[0:Full,1:Auto,2:Left,3:Center,4:Right,5:None]
+style_tab = 5; //[0:Full,1:Auto,2:Left,3:Center,4:Right,5:None]
 // which divisions have tabs
 place_tab = 0; // [0:Everywhere-Normal,1:Top-Left Division]
 // scoop weight percentage. 0 disables scoop, 1 is regular scoop. Any real number will scale the scoop.
-scoop = 1; //[0:0.1:1]
+scoop = 0; //[0:0.1:1]
 
 /* [Base Hole Options] */
 // only cut magnet/screw holes at the corners of the bin to save uneccesary print time
 only_corners = false;
 //Use gridfinity refined hole style. Not compatible with magnet_holes!
-refined_holes = true;
+refined_holes = false;
 // Base will have holes for 6mm Diameter x 2mm high magnets.
 magnet_holes = false;
 // Base will have holes for M3 screws.
