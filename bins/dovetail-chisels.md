@@ -2,128 +2,137 @@
 
 A custom Gridfinity bin designed to hold 3 dovetail chisels (3mm, 6mm, and 12mm) with ergonomic cutouts for easy access and secure storage.
 
+## Project Structure
+```
+bins/
+├── dovetail-chisels.scad    # Main chisel bin implementation
+├── dovetail-chisels.md      # This documentation file
+└── src/
+    └── solid-bin.scad           # Base bin creation module
+```
+
 ## Chisel Specifications
 
-### Set Details
+### Physical Dimensions
 - **Chisel blade widths**: 3mm, 6mm, 12mm
-- **Overall chisel length**: 225mm
-- **Quantity**: 3 chisels
+- **Overall chisel length**: 225mm total
+- **Quantity**: 3 chisels (one of each size)
 
-### Blade Section
+### Component Breakdown
+#### Blade Section (Cutting End)
 - **Length**: 60mm
 - **Widths**: 3mm, 6mm, 12mm (at cutting edge)
-- **Storage requirement**: Blades should lie flat in a 5mm deep recess to protect cutting edges
+- **Storage requirement**: Blades lie flat in 5mm deep recesses to protect cutting edges
 
-### Taper Section (Blade to Handle Transition)
+#### Taper Section (Blade to Handle Transition)
 - **Length**: 64mm
 - **Handle end width**: 17mm
-- **Blade end width**: 8.3mm
+- **Blade end width**: 8.3mm  
 - **Profile**: Linear taper connecting handle to blade
 
-### Handle Section
+#### Handle Section
 - **Length**: 131mm (calculated: 225 - 60 - 64mm)
-- **Top section**: 25mm width × 11mm length, then tapers to 20mm width
-- **Bottom section**: 20mm width
-- **Midpoint width**: 21.5mm
-- **Profile**: Round cross-section
+- **Maximum width**: 25mm (at grip area)
+- **Minimum width**: 20mm
+- **Cross-section**: Round profile
+- **Grip area**: Ergonomic finger relief needed for removal
 
-## Bin Design Requirements
+## Gridfinity Bin Specifications
 
-### Gridfinity Dimensions
-- **Grid size**: 6×2 units (6 units wide × 2 units deep)
-- **Internal dimensions**: ~252mm × 84mm (42mm per grid unit minus walls)
-- **Height**: 35mm above bin feet
-- **Reason**: Accommodates 225mm chisel length (252mm internal) with clearance
+### Design Features
 
-### Cutout Design
+#### Blade Protection Recesses
+- **Location**: Front of bin (X=10mm from edge)
+- **Depth**: 5mm deep from top surface
+- **Dimensions per chisel**:
+  - 3mm chisel: 5mm wide × 62mm long recess
+  - 6mm chisel: 8mm wide × 62mm long recess  
+  - 12mm chisel: 14mm wide × 62mm long recess
+- **Purpose**: Protects cutting edges, prevents blade damage
 
-#### Blade Storage Area
-- **Type**: Flat recessed area, 5mm deep
-- **Dimensions**: 
-  - Length: 62mm (60mm blade + 2mm clearance)
-  - Width per chisel: 
-    - 3mm chisel: 5mm wide recess (3mm + 2mm clearance)
-    - 6mm chisel: 8mm wide recess (6mm + 2mm clearance)  
-    - 12mm chisel: 14mm wide recess (12mm + 2mm clearance)
-- **Position**: One end of each chisel slot (aligned with grid)
-- **Purpose**: Protects cutting edges, prevents movement
+#### Handle Access Holes
+- **Location**: Back of bin (X=220mm from front edge)
+- **Type**: Cylindrical through-holes with finger reliefs
+- **Diameter**: 27mm (accommodates 25mm max handle width)
+- **Finger relief**: Oval cutout 35mm×20mm×8mm deep for grip
+- **Purpose**: Easy chisel insertion/removal
 
-#### Handle Cutouts
-- **Type**: Cylindrical holes with ergonomic finger relief
-- **Diameter**: 27mm (accommodates 25mm max handle width + clearance)
-- **Depth**: Through-hole or 30mm deep minimum
-- **Finger relief**: 
-  - Oval cutout at handle midpoint: 35mm × 20mm × 8mm deep
-  - Purpose: Easy finger and thumb grip for removal
+#### Taper Channels
+- **Function**: Connects blade recesses to handle holes
+- **Profile**: Hull-generated smooth transition
+- **Start**: X=72mm (end of blade recess area)
+- **End**: X=150mm (beginning of handle area)
+- **Depth**: 10mm from top surface
+- **Cross-section**: Rectangular to circular transition
 
-#### Taper Section Accommodation
-- **Type**: Tapered channel connecting blade recess to handle hole
-- **Profile**: Matches chisel taper (17mm to 8.3mm over 64mm length)
-- **Depth**: 10mm to accommodate cylindrical handle profile
-- **Cross-section**: Gradually transitions from rectangular (blade area) to circular (handle area)
+#### Identification Labels
+- **Text**: "3mm", "6mm", "12mm" for each chisel slot
+- **Location**: X=100mm (center of bin), Y matches chisel positions
+- **Style**: Raised 2mm above bin floor
+- **Font**: Liberation Sans Bold, 4mm height
+- **Material**: Integrated into print (no separate labeling needed)
 
-#### Labels
-- **Text**: Each chisel slot labeled with blade width ("3mm", "6mm", "12mm")
-- **Position**: Bottom of each chisel slot, centered
-- **Font**: Sans-serif, bold, 2mm height for visibility
-- **Purpose**: Quick identification and organization
+## Layout Configuration
 
-### Layout Configuration
+## Technical Implementation
 
-#### Individual Chisel Slot Layout
-```
-[Blade Recess] ----[Taper Channel]---- [Handle Hole with Relief]
-     (5mm deep)        (10mm deep)         (Through or 30mm)
-|<--- 62mm --->|<------ 64mm ----->|<------- 99mm ------->|
-                Total length: 225mm
-```
+### Key Parameters
+- **Chisel spacing**: 21mm center-to-center
+- **Blade recess depth**: 5mm from top surface
+- **Handle hole diameter**: 27mm through-hole
+- **Taper channel depth**: 10mm from top surface
+- **Text height**: 2mm raised above floor
 
-#### Overall Bin Layout (Top View)
-```
-Grid Units:  1    2    3    4    5    6
-           |----|----|----|----|----|----|
-Row 1:     [    3mm Chisel Slot        ] } 28mm spacing
-           |                            |
-Row 2:     [    6mm Chisel Slot        ] } 28mm spacing  
-           |                            |
-Row 3:     [   12mm Chisel Slot        ]
-           |----|----|----|----|----|----|
-```
+### Implementation Details
+1. **Base bin creation**: Uses `create_bin()` from `solid-bin.scad`
+2. **Cutout generation**: `difference()` operation removes material
+3. **Blade recesses**: Individual `cube()` cutouts per chisel size
+4. **Handle holes**: `cylinder()` cutouts with finger relief `scale()`
+5. **Taper channels**: `hull()` operation between rectangular and circular shapes
+6. **Text labels**: `linear_extrude()` with `text()` function
 
-### Spacing Between Chisels
-- **Center-to-center distance**: 28mm (accommodates 2 grid units width)
-- **Reason**: Provides adequate clearance for handles while fitting 3 chisels in 2×6 grid
-- **Alignment**: Each chisel centered in its 28mm wide lane
+## 3D Printing Guide
 
-## Technical Implementation Details
+### Recommended Print Settings
+- **Material**: PLA filament (PETG acceptable for higher durability)
+- **Layer height**: 0.2mm for good surface finish
+- **Infill**: 10-15% (low strength requirements, focus on surface quality)
+- **Print speed**: 50-60mm/s for good quality
+- **Nozzle temperature**: 210°C PLA / 240°C PETG
+- **Bed temperature**: 60°C PLA / 70°C PETG
 
-### OpenSCAD Parameters for create_bin()
-- **xGrids**: 6 (6 grid units wide)
-- **yGrids**: 2 (2 grid units deep)  
-- **height**: 35 (35mm above bin feet)
+### Support Requirements
+- **Finger relief overhangs**: May need supports if >45° overhang
+- **Text labels**: Usually print well without supports (2mm height)
+- **Handle holes**: No supports needed (through-holes print cleanly)
+- **Taper channels**: No supports needed (gradual slope)
 
-### Custom Cutouts Required
-1. **Blade recesses**: 3 rectangular cutouts, varying widths, 5mm deep
-2. **Handle holes**: 3 circular holes, 27mm diameter, through-holes
-3. **Taper channels**: 3 connecting channels with gradual taper
-4. **Finger reliefs**: 3 oval cutouts, 35×20×8mm
-5. **Text labels**: Raised text "3mm", "6mm", "12mm"
+### Print Orientation & Time
+- **Orientation**: Bin upright (standard Gridfinity position)
+- **Estimated time**: 4-6 hours @ 50mm/s depending on infill
+- **Filament usage**: ~150-200g depending on infill percentage
 
-### Cutout Positioning (from front-left corner)
-- **3mm chisel**: X=14mm, Y=14mm (centered in first 28mm lane)
-- **6mm chisel**: X=42mm, Y=14mm (centered in second 28mm lane)  
-- **12mm chisel**: X=70mm, Y=14mm (centered in third 28mm lane)
+### Post-Processing
+1. **Remove any support material** carefully from finger relief areas
+2. **Test fit chisels** before final use
+3. **Light sanding** of contact surfaces if chisels bind
+4. **Deburr** any sharp edges around cutouts
 
-## Manufacturing Notes
-- **Material**: Standard PLA filament
-- **Layer height**: 0.2mm recommended for smooth surfaces
-- **Infill**: 5% - strength is not required
-- **Support**: May be needed for finger relief overhangs and text labels
-- **Print orientation**: Bin laying down
-- **Post-processing**: Light sanding of contact surfaces recommended
+## Usage Instructions
 
-## Usage
-1. Blades rest in shallow recesses (cutting edge protected)
-2. Handles accessible via finger relief cutouts
-3. Tapered sections guide proper alignment
-4. Fits standard Gridfinity ecosystem for modular organization
+### Loading Chisels
+1. **Identify correct slot** using raised size labels ("3mm", "6mm", "12mm")
+2. **Insert blade first** into front recess (protects cutting edge)
+3. **Lower handle** into back hole through taper channel
+4. **Press down gently** until chisel sits flush in recesses
+
+### Removing Chisels
+1. **Use finger relief** oval cutouts to grip handle
+2. **Lift straight up** - taper channels guide smooth removal
+3. **Blade automatically clears** recess as handle lifts
+
+### Organization Benefits
+- **Blade protection**: Cutting edges never contact hard surfaces
+- **Easy identification**: Clear size labeling prevents mix-ups
+- **Modular storage**: Integrates with standard Gridfinity grid system
+- **Workshop efficiency**: Quick visual inventory of available tools
