@@ -5,7 +5,7 @@
     Uses the simplified create_bin module from solid-bin.scad
 */
 
-include <solid-bin.scad>
+include <./src/solid-bin.scad>
 
 // ===== PARAMETERS ===== //
 
