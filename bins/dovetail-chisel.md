@@ -7,6 +7,7 @@ This document describes the dimensions and features of a dovetail chisel, organi
 
 ## Blade
 - **Width:** _Parameter in SCAD file_: 3mm, 6mm, or 12mm (selectable)
+- **Thickness:** 5mm
 - **Length:** 58mm
 
 ## Socket
