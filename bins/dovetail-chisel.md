@@ -28,8 +28,9 @@ This document describes the dimensions and features of a dovetail chisel, organi
 
 ## Orientation & Alignment
 - All parts of the chisel should be consistently oriented (either all lying down or all standing up) in the model.
-- Each part should be aligned so that its center matches the center of the part it meets (e.g., blade center to socket center, socket center to handle center, etc.).
-- The blade should be lying down (X axis), and the center of the blade must be aligned to the center of the socket.
+- The blade should be lying down (X axis).
+- The center of the blade must align with the center of the socket.
+- The center of the socket must align with the center of the handle.
 
 
 ### Notes
