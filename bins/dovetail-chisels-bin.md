@@ -92,19 +92,29 @@ The bin is to hold 3 dovetail chisels (3mm, 6mm & 12mm) side by side with an eve
 
 ## SCAD file generation
 
+
 Put calculation in the .scad file, not the result.
+
+**String concatenation in OpenSCAD:**
 
 Wrong
 ```openscad
-xOffset = 10
+text(str(width) + "mm") // produces warning
 ```
 
 Right
 ```openscad
-x = 2
-chisel = 8
-xOffset = x + chisel
+text(str(width) ~ "mm") // no warning
 ```
+
+
+**SCAD Generation Workflow:**
+
+When you ask to "generate scad from #file:dovetail-chisels-bin.md", the process is:
+1. Delete the current SCAD files (`dovetail-chisels-bin.scad` and any related SCAD output) if they exist.
+2. Generate new SCAD files directly from this markdown specification.
+
+This ensures the generated SCAD files are always up-to-date and do not use any history or previous content.
 
 ## OpenSCAD Usage Note
 
