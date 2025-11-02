@@ -51,8 +51,9 @@ The bin is to hold 3 dovetail chisels (3mm, 6mm & 12mm) side by side with an eve
 - **Purpose**: Protects cutting edges, prevents blade damage
 
 #### Handle Access Holes
-- **Finger relief**: Oval cutout 35mm×20mm×8mm deep for grip
-- **Purpose**: Easy chisel insertion/removal
+**Finger relief**: Oval cutout 35mm×20mm×8mm deep for grip
+**Purpose**: Easy chisel insertion/removal
+**OpenSCAD Implementation**: Use `scale([35/16, 20/16, 8/16]) sphere(r=8);` for an oval cutout (replace `resize()` with `scale()`)
 
 #### Identification Labels
 - **Text**: "3mm", "6mm", "12mm" for each chisel slot
@@ -97,16 +98,19 @@ Put calculation in the .scad file, not the result.
 
 **String concatenation in OpenSCAD:**
 
-Wrong
+Use the ~ operator for string concatenation in OpenSCAD, and concatenate directly inside the text() call:
 ```openscad
-text(str(width) + "mm") // produces warning
+text(str(width) ~ "mm", size=8, valign="center", halign="center"); // no warning or syntax error
 ```
 
-Right
-```openscad
-text(str(width) ~ "mm") // no warning
-```
+Avoid assigning the label to a variable inside a for loop; instead, concatenate directly in the text() function to prevent syntax errors.
 
+**Oval Finger Relief Cutout:**
+For oval finger relief, use:
+```openscad
+scale([35/16, 20/16, 8/16]) sphere(r=8);
+```
+Do NOT use `resize()` (not valid in OpenSCAD). Do not use `resize()` anywhere in the generated SCAD file.
 
 **SCAD Generation Workflow:**
 
@@ -119,9 +123,7 @@ This ensures the generated SCAD files are always up-to-date and do not use any h
 ## OpenSCAD Usage Note
 
 When including the base bin module in your OpenSCAD file, use:
-
 ```openscad
 include <src/solid-bin.scad>
 ```
-
 Use create_bin(xGrids, yGrids, height) to create the Gridfinity bin. Height is in mm above the Gridfinity feet.
