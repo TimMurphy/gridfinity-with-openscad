@@ -41,10 +41,20 @@ This document describes the dimensions and features of a dovetail chisel, organi
 
 ## SCAD Generation Instructions
 
-When asked to "generate scad from #file:dovetail-chisel.md", the following files will be created:
+To generate the SCAD files from this specification, follow these steps:
 
-- `./dovetail-chisel.scad`: Top-level file. Set `blade_width` to 3, 6, or 12. This file calls the module in `./src/dovetail-chisel.scad`.
-- `./src/dovetail-chisel.scad`: Contains the `dovetail_chisel(blade_width)` module, using all dimensions from this specification. The blade width is passed as a parameter.
+1. **Delete old files:**
+	- Remove `./dovetail-chisel.scad` if it exists.
+	- Remove `./src/dovetail-chisel.scad` if it exists.
 
-This structure allows easy selection of blade width and keeps the model organized for future extension.
+2. **Create new files:**
+	- `./dovetail-chisel.scad`: This is the top-level file. Set the `blade_width` parameter to 3, 6, or 12. It imports and calls the module from `./src/dovetail-chisel.scad`.
+	- `./src/dovetail-chisel.scad`: This file defines the `dovetail_chisel(blade_width)` module, using all dimensions from this specification. The blade width is passed as a parameter.
+
+3. **Alignment and orientation:**
+	- All parts must be consistently oriented (lying down along the X axis).
+	- The center of the blade must align with the center of the socket.
+	- The center of the socket must align with the center of the handle.
+
+This workflow ensures the SCAD files are always generated from the latest markdown specification, with no legacy code or history. The structure allows easy selection of blade width and keeps the model organized for future extension.
 
